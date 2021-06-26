@@ -1,5 +1,7 @@
 <?php 
 $pagina = 'categorias';
+
+require_once("verificar.php"); 
 ?>
 <a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Nova Categoria</a>
 

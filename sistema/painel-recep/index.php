@@ -6,18 +6,13 @@ require_once("verificar.php");
 // MENUS PARA O PAINEL
 
 $menu1 = 'home';
-$menu2 = 'usuarios';
-$menu3 = 'funcionarios';
-$menu4 = 'cargos';
-$menu5 = 'mesas';
-$menu6 = 'fornecedores';
-$menu7 = 'categorias';
-$menu8 = 'produtos';
-$menu9 = 'pratos';
-$menu10 = 'compras';
-$menu11 = 'banners';
-$menu12 = 'blog';
-$menu13 = 'estoque';
+$menu2 = 'reservas';
+$menu3 = 'clientes';
+$menu4 = 'pagar';
+$menu5 = 'receber';
+$menu6 = 'compras';
+$menu6 = 'movimentacoes';
+
 
 
 // RECUPERAR OS DADOS DO USUÁRIO
@@ -75,56 +70,29 @@ if($total_reg > 0){
 						<a class="nav-link active text-light" aria-current="page" href="index.php?pag=<?php echo $menu1 ?>">Home</a>
 					</li>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Pessoas
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu2 ?>">Usuários</a></li>
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu3 ?>">Funcionários</a></li>
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu6 ?>">Fornecedores</a></li>
+					<li class="nav-item">
+						<a class="nav-link active text-light" aria-current="page" href="index.php?pag=<?php echo $menu2 ?>">Reservas</a>
+					</li>
 
-						</ul>
+					<li class="nav-item">
+						<a class="nav-link active text-light" aria-current="page" href="index.php?pag=<?php echo $menu3 ?>">Clientes</a>
 					</li>
 
 
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Cadastros
+							Contas / Movimentações
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu4 ?>">Cargos</a></li>
+							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu4 ?>">Contas à Pagar</a></li>
+							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu5 ?>">Contas à Receber</a></li>
+							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu6 ?>">Compras</a></li>
 
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu5 ?>">Mesas</a></li>
-
-							<li><hr class="dropdown-divider"></li>
-
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu11 ?>">Banners</a></li>
-
-
+							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu7 ?>">Movimentações</a></li>
 
 						</ul>
 					</li>
 
-					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							Produtos / Pratos
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu8 ?>">Produtos</a></li>
-
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu9 ?>">Pratos</a></li>
-
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu7 ?>">Categorias</a></li>
-
-							<li><hr class="dropdown-divider"></li>
-
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu10?>">Compras</a></li>
-							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu13?>">Estoque</a></li>
-
-
-						</ul>
-					</li>
 
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -144,9 +112,6 @@ if($total_reg > 0){
 						</ul>
 					</li>
 
-				<li class="nav-item">
-						<a class="nav-link text-light" aria-current="page" href="index.php?pag=<?php echo $menu12 ?>">Blog</a>
-					</li>
 
 
 				</ul>
@@ -192,24 +157,6 @@ if($total_reg > 0){
 
 		}else if(@$_GET['pag'] == $menu7){
 			require_once($menu7.'.php');
-
-		}else if(@$_GET['pag'] == $menu8){
-			require_once($menu8.'.php');
-
-		}else if(@$_GET['pag'] == $menu9){
-			require_once($menu9.'.php');
-
-		}else if(@$_GET['pag'] == $menu10){
-			require_once($menu10.'.php');
-
-		}else if(@$_GET['pag'] == $menu11){
-			require_once($menu11.'.php');
-
-		}else if(@$_GET['pag'] == $menu12){
-			require_once($menu12.'.php');
-
-		}else if(@$_GET['pag'] == $menu13){
-			require_once($menu13.'.php');
 		}
 
 		else{

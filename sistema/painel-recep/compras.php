@@ -1,5 +1,7 @@
 <?php 
 $pagina = 'compras';
+
+require_once("verificar.php"); 
 ?>
 
 <small>
