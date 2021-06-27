@@ -1195,6 +1195,23 @@ if($total_cat > 0){
             </div>
             <div class="mu-latest-news-content">
               <div class="row">
+
+                <!-- <?php
+                
+                $query = $pdo->query("SELECT * FROM blog order by id desc limit 2");
+                $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                for($i=0; $i < @count($res); $i++) {
+                  foreach ($res[$i] as $key => $value) { }
+                  $id_reg = $res[$i]['id'];
+                  $funcionario = $res[$i]['funcionario'];
+
+                $query2 = $pdo->query("SELECT * FROM funcionarios where id = '$funcionario'");
+                $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                $nome_func = $res2[0]['nome'];
+                }
+              
+                ?> -->
+
                 <!-- start single blog -->
                 <div class="col-md-6">
                   <article class="mu-news-single">
@@ -1214,25 +1231,7 @@ if($total_cat > 0){
                     </div>                   
                   </article>
                 </div>
-                <!-- start single blog -->
-                <div class="col-md-6">
-                  <article class="mu-news-single">
-                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, distinctio!</a></h3>
-                    <figure class="mu-news-img">
-                      <a href="#"><img src="assets/img/news/2.jpg" alt="img"></a>                      
-                    </figure>
-                    <div class="mu-news-single-content">                      
-                      <ul class="mu-meta-nav">
-                        <li>By Admin</li>
-                        <li>Date: May 10 2016</li>
-                      </ul>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="mu-news-single-bottom">
-                        <a href="blog-single.html" class="mu-readmore-btn">Read More</a>
-                      </div>
-                    </div>                   
-                  </article>
-                </div>
+
               </div>
               <!-- Start brows more btn -->
               <a href="blog.php" class="mu-browsmore-btn">VER TODOS</a>
