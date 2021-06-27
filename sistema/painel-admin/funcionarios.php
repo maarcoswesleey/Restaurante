@@ -1,9 +1,9 @@
 <?php 
 $pagina = 'funcionarios';
+require_once("verificar.php");
 
-require_once("verificar.php"); 
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Novo Funcionário</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Funcionário</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
@@ -45,10 +45,10 @@ require_once("verificar.php");
 					<td><?php echo $nome_cargo ?></td>
 					<td><?php echo $data ?></td>
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Funcionário">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
 
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Funcionário">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
 
 								<a href="" onclick="dados('<?php echo $res[$i]["nome"] ?>', '<?php echo $res[$i]["cpf"] ?>', '<?php echo $res[$i]["email"] ?>', '<?php echo $res[$i]["telefone"] ?>', '<?php echo $nome_cargo ?>', '<?php echo $res[$i]["endereco"] ?>')" title="Ver Dados">
@@ -74,9 +74,9 @@ require_once("verificar.php");
 						<div class="modal-header">
 							<?php 
 							if(@$_GET['funcao'] == 'novo'){
-								$titulo_modal = 'Inserir Funcionário';
+								$titulo_modal = 'Inserir Registro';
 							}else{
-								$titulo_modal = 'Editar Funcionário';
+								$titulo_modal = 'Editar Registro';
 								$id = @$_GET['id'];
 								$query = $pdo->query("SELECT * FROM funcionarios WHERE  id = '$id'");
 								$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -181,13 +181,13 @@ require_once("verificar.php");
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Excluir Funcionário</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form method="post" id="form-excluir">
 							<div class="modal-body">
 
-								Deseja Realmente Excluir este Funcionário?
+								Deseja Realmente Excluir este Registro?
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 

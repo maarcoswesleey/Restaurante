@@ -1,9 +1,7 @@
 <?php 
 $pagina = 'blog';
-
-require_once("verificar.php"); 
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Nova Postagem</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Nova Postagem</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">

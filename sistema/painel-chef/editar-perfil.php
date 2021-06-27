@@ -8,7 +8,7 @@ $senha = $_POST['senha_perfil'];
 
 $especialidade = $_POST['especialidade_perfil'];
 $facebook = $_POST['facebook'];
-$youtube = $_POST['youtube'];
+$twitter = $_POST['twitter'];
 $instagram = $_POST['instagram'];
 $linkedin = $_POST['linkedin'];
 
@@ -86,14 +86,14 @@ move_uploaded_file($imagem_temp, $caminho);
 
 
 if($imagem == "sem-foto.jpg"){
-	$query = $pdo->prepare("UPDATE chef SET especialidade = :especialidade, instagram = :instagram, youtube = :youtube, linkedin = :linkedin, facebook = :facebook WHERE funcionario = '$id_func'");
+	$query = $pdo->prepare("UPDATE chef SET especialidade = :especialidade, instagram = :instagram, twitter = :twitter, linkedin = :linkedin, facebook = :facebook WHERE funcionario = '$id_func'");
 }else{
-$query = $pdo->prepare("UPDATE chef SET especialidade = :especialidade, instagram = :instagram, youtube = :youtube, linkedin = :linkedin, facebook = :facebook, imagem = :imagem WHERE funcionario = '$id_func'");
+$query = $pdo->prepare("UPDATE chef SET especialidade = :especialidade, instagram = :instagram, twitter = :twitter, linkedin = :linkedin, facebook = :facebook, imagem = :imagem WHERE funcionario = '$id_func'");
 	$query->bindValue(":imagem", "$imagem");
 }
 $query->bindValue(":especialidade", "$especialidade");
 $query->bindValue(":instagram", "$instagram");
-$query->bindValue(":youtube", "$youtube");
+$query->bindValue(":twitter", "$twitter");
 $query->bindValue(":linkedin", "$linkedin");
 $query->bindValue(":facebook", "$facebook");
 $query->execute();

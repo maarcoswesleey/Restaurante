@@ -1,5 +1,4 @@
 <?php 
-
 require_once("../../../conexao.php");
 
 $id = $_POST['id'];
@@ -13,9 +12,8 @@ if($imagem != 'sem-foto.jpg'){
 }
 
 
-$pdo->query("DELETE FROM banners WHERE id = '$id'");
+$pdo->query("DELETE from banners WHERE id = '$id'");
 
 
 echo 'Excluído com Sucesso!';
-
 ?>

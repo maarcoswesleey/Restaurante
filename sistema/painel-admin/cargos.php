@@ -1,9 +1,8 @@
 <?php 
 $pagina = 'cargos';
-
-require_once("verificar.php"); 
+require_once("verificar.php");
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Novo Cargo</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Cargo</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
@@ -25,11 +24,11 @@ require_once("verificar.php");
 				?>
 				<tr>
 					<td><?php echo $res[$i]['nome'] ?></td>
-
+					
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Cargo">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Cargo">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
 							</td>
 						</tr>
@@ -51,9 +50,9 @@ require_once("verificar.php");
 					<div class="modal-header">
 						<?php 
 						if(@$_GET['funcao'] == 'novo'){
-							$titulo_modal = 'Inserir Novo Cargo';
+							$titulo_modal = 'Inserir Registro';
 						}else{
-							$titulo_modal = 'Editar Cargo';
+							$titulo_modal = 'Editar Registro';
 							$id = @$_GET['id'];
 							$query = $pdo->query("SELECT * FROM cargos WHERE  id = '$id'");
 							$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -83,7 +82,7 @@ require_once("verificar.php");
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar">Fechar</button>
-							<button type="submit" class="btn btn-primary">Salvar Alterações</button>
+							<button type="submit" class="btn btn-primary">Salvar</button>
 						</div>
 					</form>
 				</div>
@@ -97,7 +96,7 @@ require_once("verificar.php");
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Excluir Cargo</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 					</div>
 					<form method="post" id="form-excluir">
@@ -107,7 +106,7 @@ require_once("verificar.php");
 
 							<input type="hidden" name="id"  value="<?php echo @$id ?>">
 
-							<span class="mb-2">Deseja Realmente Excluir este Cargo?</span>
+							<span class="mb-2">Deseja Realmente Excluir este Registro?</span>
 							<br><br>
 							<small><div align="center" id="mensagem-excluir" >
 							</div></small>

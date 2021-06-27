@@ -1,7 +1,6 @@
 <?php 
 $pagina = 'produtos';
-
-require_once("verificar.php"); 
+require_once("verificar.php");
 ?>
 
 <small>
@@ -60,10 +59,10 @@ require_once("verificar.php");
 					<td><?php echo $res[$i]['estoque'] ?></td>
 					<td><img src="../img/<?php echo $pagina ?>/<?php echo $res[$i]['imagem'] ?>" width="40"></td>
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Produto">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
 
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Produto">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
 
 								<a href="" onclick="dados('<?php echo $res[$i]["nome"] ?>', '<?php echo $valor_compra ?>', '<?php echo $valor_venda ?>', '<?php echo $nome_cat ?>', '<?php echo $nome_forn ?>', '<?php echo $res[$i]["estoque"] ?>', '<?php echo $res[$i]["imagem"] ?>', '<?php echo $res[$i]["descricao"] ?>')" title="Ver Dados">
@@ -85,18 +84,22 @@ require_once("verificar.php");
 
 
 
+
+
+
+
 			<!-- Modal -->
 			<div class="modal fade" id="excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Excluir Produto</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form method="post" id="form-excluir">
 							<div class="modal-body">
 
-								Deseja Realmente Excluir este Produto?
+								Deseja Realmente Excluir este Registro?
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 
@@ -231,6 +234,49 @@ require_once("verificar.php");
 					</div>
 				</div>
 			</div>
+
+
+
+
+
+
+			<?php 
+			if(@$_GET['funcao'] == 'editar'){ ?>
+				<script type="text/javascript">
+					var myModal = new bootstrap.Modal(document.getElementById('cadastro'), {
+						backdrop: 'static'
+					})
+
+					myModal.show();
+				</script>
+			<?php } ?>
+
+
+			<?php 
+			if(@$_GET['funcao'] == 'excluir'){ ?>
+				<script type="text/javascript">
+					var myModal = new bootstrap.Modal(document.getElementById('excluir'), {
+
+					})
+
+					myModal.show();
+				</script>
+			<?php } ?>
+
+
+
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+					$('#example').DataTable({
+						"ordering": false
+					});
+				} );
+			</script>
+
+
+
+
 
 
 
@@ -379,7 +425,7 @@ require_once("verificar.php");
                     //$('#nome').val('');
                     //$('#cpf').val('');
                     $('#btn-fechar-comprar').click();
-                    window.location = "index.php?pag=estoque"
+                    window.location = "index.php?pag=estoque";
 
                 } else {
 

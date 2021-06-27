@@ -20,10 +20,11 @@ if($nome != $nome_banco){
 	$res = $query->fetchAll(PDO::FETCH_ASSOC);
 	$total_reg = @count($res);
 	if($total_reg > 0){
-		echo 'Produto já Cadastrado!';
+		echo 'Nome já Cadastrado!';
 		exit();
 	}
 }
+
 
 
 //SCRIPT PARA SUBIR FOTO NO BANCO
@@ -47,24 +48,28 @@ move_uploaded_file($imagem_temp, $caminho);
 }
 
 
+
 if($id == ""){
 	$query = $pdo->prepare("INSERT INTO produtos SET nome = :nome, descricao = :descricao, valor_venda = :valor_venda, categoria = :categoria, imagem = :imagem");
 	$query->bindValue(":imagem", "$imagem");
 }else{
-	if ($imagem == "sem-foto.jpg") {
+	if($imagem == "sem-foto.jpg"){
 		$query = $pdo->prepare("UPDATE produtos SET nome = :nome, descricao = :descricao, valor_venda = :valor_venda, categoria = :categoria WHERE id = '$id'");
-	} else {
-
-
-	$query = $pdo->prepare("UPDATE produtos SET nome = :nome, descricao = :descricao, valor_venda = :valor_venda, categoria = :categoria, imagem = :imagem WHERE id = '$id'"); $query->bindValue(":imagem", "$imagem");
+	}else{
+		$query = $pdo->prepare("UPDATE produtos SET nome = :nome, descricao = :descricao, valor_venda = :valor_venda, categoria = :categoria, imagem = :imagem WHERE id = '$id'");
+		$query->bindValue(":imagem", "$imagem");
 	}
+	
 }
 
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":descricao", "$descricao");
 $query->bindValue(":valor_venda", "$valor_venda");
 $query->bindValue(":categoria", "$categoria");
+
 $query->execute();
+
+
 
 
 echo 'Salvo com Sucesso!';

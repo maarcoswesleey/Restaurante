@@ -1,9 +1,8 @@
 <?php 
 $pagina = 'produtos';
-
-require_once("verificar.php"); 
+require_once("verificar.php");
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Novo Produto</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Produto</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
@@ -61,10 +60,10 @@ require_once("verificar.php");
 					<td><?php echo $res[$i]['estoque'] ?></td>
 					<td><img src="../img/<?php echo $pagina ?>/<?php echo $res[$i]['imagem'] ?>" width="40"></td>
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Produto">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
 
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Produto">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
 
 								<a href="" onclick="dados('<?php echo $res[$i]["nome"] ?>', '<?php echo $valor_compra ?>', '<?php echo $valor_venda ?>', '<?php echo $nome_cat ?>', '<?php echo $nome_forn ?>', '<?php echo $res[$i]["estoque"] ?>', '<?php echo $res[$i]["imagem"] ?>', '<?php echo $res[$i]["descricao"] ?>')" title="Ver Dados">
@@ -95,9 +94,9 @@ require_once("verificar.php");
 						<div class="modal-header">
 							<?php 
 							if(@$_GET['funcao'] == 'novo'){
-								$titulo_modal = 'Inserir Produto';
+								$titulo_modal = 'Inserir Registro';
 							}else{
-								$titulo_modal = 'Editar Produto';
+								$titulo_modal = 'Editar Registro';
 								$id = @$_GET['id'];
 								$query = $pdo->query("SELECT * FROM produtos WHERE  id = '$id'");
 								$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -203,13 +202,13 @@ require_once("verificar.php");
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Excluir Produto</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form method="post" id="form-excluir">
 							<div class="modal-body">
 
-								Deseja Realmente Excluir este Produto?
+								Deseja Realmente Excluir este Registro?
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 

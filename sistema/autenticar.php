@@ -25,15 +25,28 @@ if($total_reg > 0){
 
 	if($res[0]['nivel'] == 'Chef'){
 		echo "<script language='javascript'> window.location='painel-chef' </script>";
+	}
 
-	}if($res[0]['nivel'] == 'Recepcionista'){
+	if($res[0]['nivel'] == 'Recepcionista'){
 		echo "<script language='javascript'> window.location='painel-recep' </script>";
 	}
 
-}else {
-	echo "<script language='javascript'>window.alert('Dados Incorretos!')</script> ";
 
-	echo "<script language='javascript'>window.location='index.php'</script> ";
+	if($res[0]['nivel'] == 'Garçon'){
+		echo "<script language='javascript'> window.location='painel-garcon' </script>";
+	}
+
+	if($res[0]['nivel'] == 'Tela'){
+		echo "<script language='javascript'> window.location='painel-tela' </script>";
+	}
+
+
+
+}else{
+	echo "<script language='javascript'>window.alert('Dados Incorretos!')</script>";
+
+	echo "<script language='javascript'>window.location='index.php'</script>";
 }
+
 
  ?>

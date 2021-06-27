@@ -59,7 +59,6 @@ $query->execute();
 $id_funcionario = $pdo->lastInsertId();
 
 
-
 //trazer o nome do cargo
 $query = $pdo->query("SELECT * FROM cargos WHERE  id = '$cargo'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -67,7 +66,7 @@ $nome_cargo = @$res[0]['nome'];
 
 //LANÇAR OU EDITAR DADOS NA TABELA DOS USUÁRIOS
 if($id == ""){
-	$query = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = '12345', nivel = :cargo");
+	$query = $pdo->prepare("INSERT INTO usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = '123', nivel = :cargo");
 }else{
 	$query = $pdo->prepare("UPDATE usuarios SET nome = :nome, cpf = :cpf, email = :email, senha = '123', nivel = :cargo WHERE cpf = '$cpf_banco'");
 }
@@ -80,12 +79,12 @@ $query->execute();
 
 
 
-if ($nome_cargo == 'Chef') {
-
+if($nome_cargo == 'Chef'){
 	$query = $pdo->prepare("INSERT INTO chef SET funcionario = '$id_funcionario'");
 	$query->execute();
-
 }
+
+
 
 echo 'Salvo com Sucesso!';
 ?>

@@ -1,8 +1,6 @@
 <?php 
-@session_start();
-
 require_once("../../../conexao.php");
-
+@session_start();
 
 $descricao_1 = $_POST['descricao_1'];
 $descricao_2 = $_POST['descricao_2'];
@@ -60,6 +58,8 @@ $query->bindValue(":descricao_1", "$descricao_1");
 $query->bindValue(":descricao_2", "$descricao_2");
 $query->bindValue(":descricao_3", "$descricao_3");
 $query->bindValue(":palavras", "$palavras");
+
+
 $query->execute();
 
 

@@ -11,8 +11,8 @@ $id = $_POST['id'];
 //BUSCAR O REGISTRO JÁ CADASTRADO NO BANCO
 $query = $pdo->query("SELECT * FROM fornecedores WHERE  id = '$id'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-$cpf_banco = @$res[0]['cpf'];
 $email_banco = @$res[0]['email'];
+
 
 
 if($email != $email_banco){
@@ -33,7 +33,7 @@ if($email != $email_banco){
 if($id == ""){
 	$query = $pdo->prepare("INSERT INTO fornecedores SET nome = :nome, email = :email, telefone = :telefone, endereco = :endereco, produto = :produto");
 }else{
-	$query = $pdo->prepare("UPDATE fornecedores SET nome = :nome, email = :email, telefone = :telefone, endereco = :endereco, produto = :produto WHERE id = '$id'");
+	$query = $pdo->prepare("UPDATE fornecedores SET nome = :nome, email = :email, telefone = :telefone, endereco = :endereco,  produto = :produto WHERE id = '$id'");
 }
 
 $query->bindValue(":nome", "$nome");

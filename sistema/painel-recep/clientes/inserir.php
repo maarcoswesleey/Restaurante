@@ -9,8 +9,8 @@ $id = $_POST['id'];
 //BUSCAR O REGISTRO JÁ CADASTRADO NO BANCO
 $query = $pdo->query("SELECT * FROM clientes WHERE  id = '$id'");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
-$cpf_banco = @$res[0]['cpf'];
 $email_banco = @$res[0]['email'];
+
 
 
 if($email != $email_banco){
@@ -37,6 +37,7 @@ if($id == ""){
 $query->bindValue(":nome", "$nome");
 $query->bindValue(":email", "$email");
 $query->bindValue(":telefone", "$telefone");
+
 $query->execute();
 
 

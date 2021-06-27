@@ -6,6 +6,8 @@ $dataInicial = $_POST['dataInicial'];
 $dataFinal = $_POST['dataFinal'];
 $status = $_POST['status'];
 
+
+
 //ALIMENTAR OS DADOS NO RELATÓRIO
 $html = file_get_contents($url."sistema/rel/rel_compras.php?dataInicial=$dataInicial&dataFinal=$dataFinal&status=$status");
 

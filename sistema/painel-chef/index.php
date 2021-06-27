@@ -35,7 +35,7 @@ $total_reg = @count($res);
 if($total_reg > 0){
 	$especialidade = $res[0]['especialidade'];
 	$facebook = $res[0]['facebook'];
-	$youtube = $res[0]['youtube'];
+	$twitter = $res[0]['twitter'];
 	$linkedin = $res[0]['linkedin'];
 	$instagram = $res[0]['instagram'];
 	$imagem_perfil = $res[0]['imagem'];
@@ -51,11 +51,10 @@ if($total_reg > 0){
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Painel do Chef </title>
+	<title>Painel do Chef</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
 
-	<link rel="shortcut icon" href="../img/icone.png" type="image/x-icon">
-	<link href="../vendor/css/painel.css" rel="stylesheet">
+	<link rel="shortcut icon" href="../img/icone2.ico" type="image/x-icon">
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,9 +73,9 @@ if($total_reg > 0){
 </head>
 <body>
 
-	<nav class="navbar navbar-expand-lg">
+	<nav class="navbar navbar-expand-lg navbar-dark" style="background: #000000;">
 		<div class="container-fluid">
-			<a class="navbar-brand" href="index.php"><img src="../img/sologo.png" width="250"></a>
+			<a class="navbar-brand" href="index.php"><img src="../img/logo-texto-grande.png" width="250"></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
@@ -96,27 +95,29 @@ if($total_reg > 0){
 
 					
 				</ul>
-				<form class="d-flex mr-4">
+				<div class="d-flex mr-4">
+          <img class="img-profile rounded-circle" src="../img/sem-usuario.jpg" width="40px" height="40px">
+          
+          <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <?php echo $nome_usu ?>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                   <li><a class="dropdown-item <?php echo @$classeMenu ?>" href="" data-bs-toggle="modal" data-bs-target="#perfil">Editar Perfil</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item <?php echo @$classeMenu ?>" href="../logout.php">Sair</a></li>
 
-					<img class="img-profile rounded-circle" src="../img/chef/<?php echo $imagem_perfil ?>" width="40px" height="40px">
-					<li class="nav-item dropdown" style="list-style: none;">
-						<a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-							<?php echo $nome_usu; ?>
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="" data-bs-toggle="modal" data-bs-target="#perfil">
-								Editar Perfil
-							</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="../logout.php">Sair</a></li>
-
-						</ul>
-					</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
 
 
 
 
-				</form>
+        </div>
 			</div>
 		</div>
 	</nav>
@@ -222,8 +223,8 @@ if($total_reg > 0){
 				<div class="row">
 					<div class="col-6">
 						<div class="mb-3">
-							<label for="exampleFormControlInput1" class="form-label">YouTube </label>
-							<input type="text" class="form-control" id="youtube" name="youtube" placeholder="Youtube" value="<?php echo $youtube ?>">
+							<label for="exampleFormControlInput1" class="form-label">Twitter </label>
+							<input type="text" class="form-control" id="twitter" name="twitter" placeholder="Twitter" value="<?php echo $twitter ?>">
 						</div>
 					</div>
 

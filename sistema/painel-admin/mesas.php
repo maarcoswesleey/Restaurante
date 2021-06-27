@@ -1,23 +1,22 @@
 <?php 
 $pagina = 'mesas';
+require_once("verificar.php");
 
-require_once("verificar.php"); 
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Nova Mesa</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Mesa</a>
 
 <small>
-<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
-<thead>
-<tr>
-	<th>Nome</th>
-	<th>Descrição</th>
-	<th>Ações</th>
+	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Descrição</th>
+				<th>Ações</th>
 
-</tr>
-</thead>
-<tbody>
-
-	<?php 
+			</tr>
+		</thead>
+		<tbody>
+			<?php 
 			$query = $pdo->query("SELECT * FROM mesas order by id desc");
 			$res = $query->fetchAll(PDO::FETCH_ASSOC);
 			for($i=0; $i < @count($res); $i++){
@@ -39,233 +38,233 @@ require_once("verificar.php");
 
 					<?php } ?>
 
-	</tbody>
-</table>
-</small>
+				</tbody>
+			</table>
+		</small>
 
 
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="cadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-header">
-			<?php 
-			if(@$_GET['funcao'] == 'novo'){
-				$titulo_modal = 'Inserir Nova Mesa';
-			}else{
-				$titulo_modal = 'Editar Mesa';
-				$id = @$_GET['id'];
-				$query = $pdo->query("SELECT * FROM mesas WHERE  id = '$id'");
-				$res = $query->fetchAll(PDO::FETCH_ASSOC);
-				$nome = @$res[0]['nome'];
-				$descricao = @$res[0]['descricao'];
-			}
-			?>
-			<h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo_modal ?></h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		<!-- Modal -->
+		<div class="modal fade" id="cadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<?php 
+						if(@$_GET['funcao'] == 'novo'){
+							$titulo_modal = 'Inserir Registro';
+						}else{
+							$titulo_modal = 'Editar Registro';
+							$id = @$_GET['id'];
+							$query = $pdo->query("SELECT * FROM mesas WHERE  id = '$id'");
+							$res = $query->fetchAll(PDO::FETCH_ASSOC);
+							$nome = @$res[0]['nome'];
+							$descricao = @$res[0]['descricao'];
+						}
+						?>
+						<h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo_modal ?></h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form method="post" id="form">
+						<div class="modal-body">
+
+
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">Nome </label>
+								<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<?php echo @$nome ?>" required>
+							</div>	
+
+							<div class="mb-3">
+								<label for="exampleFormControlInput1" class="form-label">Descrição </label>
+								<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" value="<?php echo @$descricao ?>" >
+							</div>	
+
+
+							<input type="hidden" name="id"  value="<?php echo @$id ?>">
+
+
+							<small><div align="center" id="mensagem">
+							</div></small>
+
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar">Fechar</button>
+							<button type="submit" class="btn btn-primary">Salvar</button>
+						</div>
+					</form>
+				</div>
+			</div>
 		</div>
-		<form method="post" id="form">
-			<div class="modal-body">
 
 
-				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">Nome </label>
-					<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<?php echo @$nome ?>" required>
-				</div>	
 
-				<div class="mb-3">
-					<label for="exampleFormControlInput1" class="form-label">Descrição </label>
-					<input type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição" value="<?php echo @$descricao ?>" >
-				</div>	
+		<!-- Modal -->
+		<div class="modal fade" id="excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<form method="post" id="form-excluir">
+						<div class="modal-body">
+
+							
+
+							<input type="hidden" name="id"  value="<?php echo @$id ?>">
+
+							<span class="mb-2">Deseja Realmente Excluir este Registro?</span>
+							<br><br>
+							<small><div align="center" id="mensagem-excluir" >
+							</div></small>
 
 
-				<input type="hidden" name="id"  value="<?php echo @$id ?>">
-
-
-				<small><div align="center" id="mensagem">
-				</div></small>
-
-
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar-excluir">Fechar</button>
+							<button type="submit" class="btn btn-danger">Excluir</button>
+						</div>
+					</form>
+				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar">Fechar</button>
-				<button type="submit" class="btn btn-primary">Salvar Alterações</button>
-			</div>
-		</form>
-	</div>
-</div>
-</div>
-
-
-
-<!-- Modal -->
-<div class="modal fade" id="excluir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-	<div class="modal-content">
-		<div class="modal-header">
-			<h5 class="modal-title" id="exampleModalLabel">Excluir Mesa</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 		</div>
-		<form method="post" id="form-excluir">
-			<div class="modal-body">
-
-				
-
-				<input type="hidden" name="id"  value="<?php echo @$id ?>">
-
-				<span class="mb-2">Deseja Realmente Excluir esta Mesa?</span>
-				<br><br>
-				<small><div align="center" id="mensagem-excluir" >
-				</div></small>
-
-
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar-excluir">Fechar</button>
-				<button type="submit" class="btn btn-danger">Excluir</button>
-			</div>
-		</form>
-	</div>
-</div>
-</div>
 
 
 
 
 
 
-<?php 
-if(@$_GET['funcao'] == 'novo'){ ?>
-<script type="text/javascript">
-	var myModal = new bootstrap.Modal(document.getElementById('cadastro'), {
-		backdrop: 'static'
-	})
+		<?php 
+		if(@$_GET['funcao'] == 'novo'){ ?>
+			<script type="text/javascript">
+				var myModal = new bootstrap.Modal(document.getElementById('cadastro'), {
+					backdrop: 'static'
+				})
 
-	myModal.show();
-</script>
-<?php } ?>
-
-
-<?php 
-if(@$_GET['funcao'] == 'editar'){ ?>
-<script type="text/javascript">
-	var myModal = new bootstrap.Modal(document.getElementById('cadastro'), {
-		backdrop: 'static'
-	})
-
-	myModal.show();
-</script>
-<?php } ?>
+				myModal.show();
+			</script>
+		<?php } ?>
 
 
-<?php 
-if(@$_GET['funcao'] == 'excluir'){ ?>
-<script type="text/javascript">
-	var myModal = new bootstrap.Modal(document.getElementById('excluir'), {
-		
-	})
+		<?php 
+		if(@$_GET['funcao'] == 'editar'){ ?>
+			<script type="text/javascript">
+				var myModal = new bootstrap.Modal(document.getElementById('cadastro'), {
+					backdrop: 'static'
+				})
 
-	myModal.show();
-</script>
-<?php } ?>
-
-
+				myModal.show();
+			</script>
+		<?php } ?>
 
 
-<script type="text/javascript">
-$(document).ready(function() {
-	$('#example').DataTable({
-		"ordering": false
-	});
-} );
-</script>
+		<?php 
+		if(@$_GET['funcao'] == 'excluir'){ ?>
+			<script type="text/javascript">
+				var myModal = new bootstrap.Modal(document.getElementById('excluir'), {
+					
+				})
+
+				myModal.show();
+			</script>
+		<?php } ?>
 
 
 
 
-<!-- Ajax para inserir ou editar dados -->
-<script type="text/javascript">
-$("#form").submit(function () {
-	event.preventDefault();
-	var formData = new FormData(this);
-	var pag = "<?=$pagina?>";
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#example').DataTable({
+					"ordering": false
+				});
+			} );
+		</script>
 
-	$.ajax({
-		url: pag + "/inserir.php",
-		type: 'POST',
-		data: formData,
 
-		success: function (mensagem) {
 
-			$('#mensagem').removeClass()
 
-			if (mensagem.trim() == "Salvo com Sucesso!") {
+		<!-- Ajax para inserir ou editar dados -->
+		<script type="text/javascript">
+			$("#form").submit(function () {
+				event.preventDefault();
+				var formData = new FormData(this);
+				var pag = "<?=$pagina?>";
 
-        //$('#nome').val('');
-        //$('#cpf').val('');
-        $('#btn-fechar').click();
-        window.location = "index.php?pag="+pag;
+				$.ajax({
+					url: pag + "/inserir.php",
+					type: 'POST',
+					data: formData,
 
-    } else {
+					success: function (mensagem) {
 
-    	$('#mensagem').addClass('text-danger')
-    }
+						$('#mensagem').removeClass()
 
-    $('#mensagem').text(mensagem)
+						if (mensagem.trim() == "Salvo com Sucesso!") {
 
-},
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
+                    $('#btn-fechar').click();
+                    window.location = "index.php?pag="+pag;
 
-cache: false,
-contentType: false,
-processData: false,
+                } else {
 
-});
+                	$('#mensagem').addClass('text-danger')
+                }
 
-});
-</script>
+                $('#mensagem').text(mensagem)
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            
+        });
+
+			});
+		</script>
 
 
 
 <!-- Ajax para excluir dados -->
-<script type="text/javascript">
-$("#form-excluir").submit(function () {
-	event.preventDefault();
-	var formData = new FormData(this);
-	var pag = "<?=$pagina?>";
+		<script type="text/javascript">
+			$("#form-excluir").submit(function () {
+				event.preventDefault();
+				var formData = new FormData(this);
+				var pag = "<?=$pagina?>";
 
-	$.ajax({
-		url: pag + "/excluir.php",
-		type: 'POST',
-		data: formData,
+				$.ajax({
+					url: pag + "/excluir.php",
+					type: 'POST',
+					data: formData,
 
-		success: function (mensagem) {
+					success: function (mensagem) {
 
-			$('#mensagem-excluir').removeClass()
+						$('#mensagem-excluir').removeClass()
 
-			if (mensagem.trim() == "Excluído com Sucesso!") {
+						if (mensagem.trim() == "Excluído com Sucesso!") {
 
-        //$('#nome').val('');
-        //$('#cpf').val('');
-        $('#btn-fechar-excluir').click();
-        window.location = "index.php?pag="+pag;
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
+                    $('#btn-fechar-excluir').click();
+                    window.location = "index.php?pag="+pag;
 
-    } else {
+                } else {
 
-    	$('#mensagem-excluir').addClass('text-danger')
-    }
+                	$('#mensagem-excluir').addClass('text-danger')
+                }
 
-    $('#mensagem-excluir').text(mensagem)
+                $('#mensagem-excluir').text(mensagem)
 
-},
+            },
 
-cache: false,
-contentType: false,
-processData: false,
+            cache: false,
+            contentType: false,
+            processData: false,
+            
+        });
 
-});
-
-});
-</script>
+			});
+		</script>

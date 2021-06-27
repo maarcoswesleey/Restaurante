@@ -1,9 +1,8 @@
 <?php 
 $pagina = 'clientes';
-
-require_once("verificar.php"); 
+require_once("verificar.php");
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Novo Cliente</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Cliente</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
@@ -11,7 +10,10 @@ require_once("verificar.php");
 			<tr>
 				<th>Nome</th>
 				<th>Email</th>
+				
 				<th>Telefone</th>
+				
+				
 				<th>Ações</th>
 
 			</tr>
@@ -32,12 +34,15 @@ require_once("verificar.php");
 					
 					<td><?php echo $res[$i]['telefone'] ?></td>
 					
+					
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Cliente">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
 
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Cliente">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
+
+								
 
 								</td>
 							</tr>
@@ -59,15 +64,17 @@ require_once("verificar.php");
 						<div class="modal-header">
 							<?php 
 							if(@$_GET['funcao'] == 'novo'){
-								$titulo_modal = 'Inserir Cliente';
+								$titulo_modal = 'Inserir Registro';
 							}else{
-								$titulo_modal = 'Editar Cliente';
+								$titulo_modal = 'Editar Registro';
 								$id = @$_GET['id'];
 								$query = $pdo->query("SELECT * FROM clientes WHERE  id = '$id'");
 								$res = $query->fetchAll(PDO::FETCH_ASSOC);
 								$nome = @$res[0]['nome'];
+								
 								$email = @$res[0]['email'];
 								$telefone = @$res[0]['telefone'];
+								
 								
 							}
 							?>
@@ -77,22 +84,26 @@ require_once("verificar.php");
 						<form method="post" id="form">
 							<div class="modal-body">
 
+								
 										<div class="mb-3">
 											<label for="exampleFormControlInput1" class="form-label">Nome </label>
 											<input type="text" class="form-control" id="nome" name="nome" placeholder="Nome" value="<?php echo @$nome ?>" required>
 										</div>	
+									
 										<div class="mb-3">
 											<label for="exampleFormControlInput1" class="form-label">Email </label>
 											<input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" value="<?php echo @$email ?>">
 										</div>	
 
-									<div class="mb-3">
+
+										<div class="mb-3">
 											<label for="exampleFormControlInput1" class="form-label">Telefone </label>
 											<input type="text" class="form-control" id="telefone" name="telefone" placeholder="Telefone" value="<?php echo @$telefone ?>">
 										</div>	
+									
 
-
-
+							
+							
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 
@@ -104,7 +115,7 @@ require_once("verificar.php");
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar">Fechar</button>
-								<button type="submit" class="btn btn-primary">Salvar </button>
+								<button type="submit" class="btn btn-primary">Salvar</button>
 							</div>
 						</form>
 					</div>
@@ -117,13 +128,13 @@ require_once("verificar.php");
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Excluir Cliente</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form method="post" id="form-excluir">
 							<div class="modal-body">
 
-								Deseja Realmente Excluir este Cliente?
+								Deseja Realmente Excluir este Registro?
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 
@@ -140,6 +151,7 @@ require_once("verificar.php");
 					</div>
 				</div>
 			</div>
+
 
 
 
@@ -277,3 +289,4 @@ require_once("verificar.php");
 
 				});
 			</script>
+

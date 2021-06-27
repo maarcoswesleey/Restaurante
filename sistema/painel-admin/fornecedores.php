@@ -1,9 +1,9 @@
 <?php 
 $pagina = 'fornecedores';
+require_once("verificar.php");
 
-require_once("verificar.php"); 
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Novo Fornecedor</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Fornecedor</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
@@ -37,10 +37,10 @@ require_once("verificar.php");
 					<td><?php echo $res[$i]['produto'] ?></td>
 					
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Fornecedor">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
 
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Fornecedor">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
 
 								<a href="" onclick="dados('<?php echo $res[$i]["nome"] ?>', '<?php echo $res[$i]["email"] ?>', '<?php echo $res[$i]["telefone"] ?>', '<?php echo $res[$i]["endereco"] ?>', '<?php echo $res[$i]["produto"] ?>')" title="Ver Dados">
@@ -66,9 +66,9 @@ require_once("verificar.php");
 						<div class="modal-header">
 							<?php 
 							if(@$_GET['funcao'] == 'novo'){
-								$titulo_modal = 'Inserir Fornecedor';
+								$titulo_modal = 'Inserir Registro';
 							}else{
-								$titulo_modal = 'Editar Fornecedor';
+								$titulo_modal = 'Editar Registro';
 								$id = @$_GET['id'];
 								$query = $pdo->query("SELECT * FROM fornecedores WHERE  id = '$id'");
 								$res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -143,7 +143,7 @@ require_once("verificar.php");
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-fechar">Fechar</button>
-								<button type="submit" class="btn btn-primary">Salvar </button>
+								<button type="submit" class="btn btn-primary">Salvar</button>
 							</div>
 						</form>
 					</div>
@@ -156,13 +156,13 @@ require_once("verificar.php");
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Excluir Fornecedor</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form method="post" id="form-excluir">
 							<div class="modal-body">
 
-								Deseja Realmente Excluir este Fornecedor?
+								Deseja Realmente Excluir este Registro?
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 

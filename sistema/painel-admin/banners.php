@@ -1,16 +1,15 @@
 <?php 
 $pagina = 'banners';
-
-require_once("verificar.php"); 
+require_once("verificar.php");
 ?>
-<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-primary mt-2 mb-4">Novo Banner</a>
+<a href="index.php?pag=<?php echo $pagina ?>&funcao=novo" type="button" class="btn btn-secondary mt-2 mb-4">Novo Banner</a>
 
 <small>
 	<table id="example" class="table table-hover table-sm my-4" style="width:98%;">
 		<thead>
 			<tr>
 				<th>Título</th>
-				<th>Subtítulo</th>
+				<th>Subtitulo</th>
 				<th>Link</th>
 				<th>Imagem</th>
 				<th>Ações</th>
@@ -25,19 +24,22 @@ require_once("verificar.php");
 				foreach ($res[$i] as $key => $value){	}
 					$id_reg = $res[$i]['id'];
 
+				
 				?>
 				<tr>
 					<td><?php echo $res[$i]['titulo'] ?></td>
 					<td><?php echo $res[$i]['subtitulo'] ?></td>
 					<td><?php echo $res[$i]['link'] ?></td>
+					
 					<td><img src="../img/<?php echo $pagina ?>/<?php echo $res[$i]['imagem'] ?>" width="40"></td>
 					<td>
-						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Banner">
+						<a href="index.php?pag=<?php echo $pagina ?>&funcao=editar&id=<?php echo $id_reg ?>" title="Editar Registro">
 							<i class="bi bi-pencil-square mr-1 text-primary"></i></a>
 
-							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Banner">
+							<a href="index.php?pag=<?php echo $pagina ?>&funcao=excluir&id=<?php echo $id_reg ?>" title="Excluir Registro">
 								<i class="bi bi-trash text-danger"></i></a>
 
+								
 								</td>
 							</tr>
 
@@ -58,12 +60,13 @@ require_once("verificar.php");
 						<div class="modal-header">
 							<?php 
 							if(@$_GET['funcao'] == 'novo'){
-								$titulo_modal = 'Inserir Banner';
+								$titulo_modal = 'Inserir Registro';
 							}else{
-								$titulo_modal = 'Editar Banner';
+								$titulo_modal = 'Editar Registro';
 								$id = @$_GET['id'];
 								$query = $pdo->query("SELECT * FROM banners WHERE  id = '$id'");
 								$res = $query->fetchAll(PDO::FETCH_ASSOC);
+								
 								$descricao = @$res[0]['descricao'];
 								$titulo = @$res[0]['titulo'];
 								$subtitulo = @$res[0]['subtitulo'];
@@ -80,8 +83,8 @@ require_once("verificar.php");
 								<div class="row">
 									<div class="col-4">
 										<div class="mb-3">
-											<label for="exampleFormControlInput1" class="form-label">Titulo </label>
-											<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Titulo" value="<?php echo @$titulo ?>" required>
+											<label for="exampleFormControlInput1" class="form-label">Título </label>
+											<input type="text" class="form-control" id="titulo" name="titulo" placeholder="Título" value="<?php echo @$titulo ?>" required>
 										</div>	
 									</div>
 									
@@ -89,15 +92,15 @@ require_once("verificar.php");
 
 									<div class="col-4">
 										<div class="mb-3">
-											<label for="exampleFormControlInput1" class="form-label">Subtitulo </label>
-											<input type="text" class="form-control" id="subtitulo" name="subtitulo" placeholder="Subtitulo" value="<?php echo @$subtitulo ?>" required>
+											<label for="exampleFormControlInput1" class="form-label">Título </label>
+											<input type="text" class="form-control" id="subtitulo" name="subtitulo" placeholder="SubTítulo" value="<?php echo @$subtitulo ?>" required>
 										</div>	
 									</div>
 
 									<div class="col-4">
-							<div class="mb-3">
+										<div class="mb-3">
 											<label for="exampleFormControlInput1" class="form-label">Link </label>
-											<input type="text" class="form-control" id="link" name="link" placeholder="Titulo" value="<?php echo @$link ?>" >
+											<input type="text" class="form-control" id="link" name="link" placeholder="Link" value="<?php echo @$link ?>">
 										</div>	
 									</div>
 
@@ -149,13 +152,13 @@ require_once("verificar.php");
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLabel">Excluir Banner</h5>
+							<h5 class="modal-title" id="exampleModalLabel">Excluir Registro</h5>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 						<form method="post" id="form-excluir">
 							<div class="modal-body">
 
-								Deseja Realmente Excluir este Banner?
+								Deseja Realmente Excluir este Registro?
 
 								<input type="hidden" name="id"  value="<?php echo @$id ?>">
 
@@ -310,6 +313,9 @@ require_once("verificar.php");
 			</script>
 
 
+		
+
+
 
 			<!--SCRIPT PARA CARREGAR IMAGEM -->
 			<script type="text/javascript">
@@ -344,3 +350,5 @@ require_once("verificar.php");
     }
 
 </script>
+
+
