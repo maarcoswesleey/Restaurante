@@ -1,4 +1,24 @@
-<?php require_once("config.php") ?>
+<?php 
+require_once("conexao.php");
+
+//TOTAIS 
+
+$query = $pdo->query("SELECT * FROM pratos");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_pratos = @count($res);
+
+$query = $pdo->query("SELECT * FROM categorias where nome = 'Vinhos'");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+$total_cat = @count($res);
+$total_vinhos = 0;
+if($total_cat > 0){
+  $id_cat_vinho = $res[0]['id'];
+  $query2 = $pdo->query("SELECT * FROM produtos where categoria = '$id_cat_vinho'");
+  $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+  $total_vinhos = @count($res2);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -42,12 +62,75 @@
 
   </head>
   <body>  
-  <!-- Pre Loader -->
+
+  <style type="text/css">
+
+      .alert {
+        text-align: center;
+        position: fixed;
+        bottom:0;
+        width: 100%;
+        padding: 15px;
+        margin-bottom:0px;
+        z-index: 1;
+        opacity: 90%;
+      }
+
+      .alert.hide {
+        display: none !important; 
+      }
+
+      .alert-link:hover {
+        text-decoration: underline;
+      }
+      
+      .btn-aceitar {
+        background: #e8e8e8;
+        color: #000000;
+        padding: 7px;
+        margin-left: 15px;
+        border-radius: 10px;
+        border: none;
+      }
+
+      .btn-aceitar:hover {
+        background: #f7f7f7;
+        text-decoration: none;
+        color: #000000;
+      }
+
+      
+
+  </style>
+  
+  <div class="alert hide alert-danger" role="alert">
+    Cookies: Este site guarda estatísticas de visitas para melhorar sua experiência de navegação, saiba mais em nossa  <a href="politica-de-privacidade.php" target="blank" class="alert-link"> Politica de Privacidade. </a>
+    <a class="btn-aceitar" href="#">Aceitar</a>
+  </div>
+
+  <script>
+
+    if(!localStorage.papitosCookie) {
+      document.querySelector(".alert").classList.remove('hide');
+    }
+
+    const acceptCookies = () => {
+      document.querySelector(".alert").classList.add('hide');
+      localStorage.setItem("papitosCookie", "accept");
+    };
+
+    const btnCookies = document.querySelector(".btn-aceitar");
+
+    btnCookies.addEventListener('click', acceptCookies);
+
+  </script>
+
+  <!-- Pre Loader 
   <div id="aa-preloader-area">
     <div class="mu-preloader">
       <img src="assets/img/preloader.gif" width="200px" alt=" loader img">
     </div>
-  </div>
+  </div>-->
   <!--START SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#">
       <i class="fa fa-angle-up"></i>
@@ -94,45 +177,36 @@
     <div class="mu-slider-area"> 
       <!-- Top slider -->
       <div class="mu-top-slider">
+        <?php
+        
+          $query = $pdo->query("SELECT * FROM banners order by id asc");
+          $res = $query->fetchAll(PDO::FETCH_ASSOC);
+          for($i=0; $i < @count($res); $i++) {
+            foreach ($res[$i] as $key => $value) { }
+            $id_reg = $res[$i]['id'];
+
+
+        
+        ?>
         <!-- Top slider single slide -->
         <div class="mu-top-slider-single">
-          <img src="assets/img/slider/foto.png" alt="img">
+          <img src="sistema/img/banners/<?php echo $res[$i]['imagem'] ?>" alt="img">
           <!-- Top slider content -->
           <div class="mu-top-slider-content">
-            <span class="mu-slider-small-title">Bem Vindo</span>
-            <h2 class="mu-slider-title"><?php echo "$nome_site";  ?></h2>
-            <p>Venha conhecer o mais novo e agradável bar de Trindade.</p>           
-            <a href="categorias.php" class="mu-readmore-btn">SAIBA MAIS (+)</a>
+            <span class="mu-slider-small-title"><?php echo $res[$i]['titulo'] ?></span>
+            <h2 class="mu-slider-title"><?php echo  mb_strtoupper($res[$i]['subtitulo'])  ?></h2>
+            <p><?php echo $res[$i]['descricao'] ?></p> 
+            <?php if($res[$i]['link'] != ""){  ?>   
+            <a href="<?php echo $res[$i]['link'] ?>" class="mu-readmore-btn">SAIBA MAIS (+)</a>
+            <?php } ?>    
           </div>
           <!-- / Top slider content -->
         </div>
-        <!-- / Top slider single slide -->    
-         <!-- Top slider single slide -->
-        <div class="mu-top-slider-single">
-          <img src="assets/img/slider/jantinha.png" alt="img">
-          <!-- Top slider content -->
-          <div class="mu-top-slider-content">
-            <span class="mu-slider-small-title">De Verdade</span>
-            <h2 class="mu-slider-title">Jantinhas</h2>
-            <p>As melhores jantinhas você só vai encontrar aqui.</p>           
-            <a href="categorias.php" class="mu-readmore-btn">SAIBA MAIS (+)</a>
-          </div>
-          <!-- / Top slider content -->
-        </div>
-        <!-- / Top slider single slide --> 
-         <!-- Top slider single slide -->
-        <div class="mu-top-slider-single">
-          <img src="assets/img/slider/lacarte.png" alt="img">
-          <!-- Top slider content -->
-          <div class="mu-top-slider-content">
-            <span class="mu-slider-small-title">Delicias</span>
-            <h2 class="mu-slider-title">Pratos a Lá Carte</h2>
-            <p>Pratos a lá carte, com os melhores chefes da cidade.</p>           
-            <a href="categorias.php" class="mu-readmore-btn">SAIBA MAIS (+)</a>
-          </div>
-          <!-- / Top slider content -->
-        </div>
-        <!-- / Top slider single slide -->    
+        
+        <?php 
+          }
+        ?>
+
       </div>
     </div>
   </section>
@@ -188,15 +262,15 @@
               <li class="col-md-3 col-sm-3 col-xs-12">
                 <div class="mu-single-counter">
                   <span>Pratos</span>
-                  <h3><span class="counter">55</span><sup>+</sup></h3>
+                  <h3><span class="counter"><?php echo $total_pratos ?></span><sup>+</sup></h3>
                   <p>Tipos de Pratos</p>
                 </div>
               </li>
               <li class="col-md-3 col-sm-3 col-xs-12">
                 <div class="mu-single-counter">
-                  <span>Delicias</span>
-                  <h3><span class="counter">130</span><sup>+</sup></h3>
-                  <p>Itens de Almoço</p>
+                  <span>Vinhos</span>
+                  <h3><span class="counter"><?php echo $total_vinhos ?></span><sup>+</sup></h3>
+                  <p>Carta de Vinhos</p>
                 </div>
               </li>
                <li class="col-md-3 col-sm-3 col-xs-12">
@@ -1055,142 +1129,49 @@
             </div>
             <div class="mu-chef-content">
               <ul class="mu-chef-nav">
+
+              <?php
+              
+              $query = $pdo->query("SELECT * FROM chef order by id asc");
+              $res = $query->fetchAll(PDO::FETCH_ASSOC);
+              for($i=0; $i < @count($res); $i++) {
+                foreach ($res[$i] as $key => $value) { }
+                $id_reg = $res[$i]['id'];
+                $funcionario = $res[$i]['funcionario'];
+
+              $query2 = $pdo->query("SELECT * FROM funcionarios where id = '$funcionario'");
+              $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+              $nome_func = $res2[0]['nome'];
+            
+              ?>
                 <li>
                   <div class="mu-single-chef">
                     <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-6.jpg" alt="chef img">
+                      <img src="sistema/img/chef/<?php echo $res[$i]['imagem'] ?>" alt="chef img">
                     </figure>
                     <div class="mu-single-chef-info">
-                      <h4>Simon Jonson</h4>
-                      <span>Head Chef</span>
+                      <h4><?php echo $nome_func ?></h4>
+                      <span><?php echo $res[$i]['especialidade'] ?></span>
                     </div>
                     <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook" title="Facebook"></i></a>
-                      <a href="#"><i class="fa fa-instagram" title="Instagram"></i></a>
-                      <a href="#"><i class="fa fa-youtube" title="YouTube"></i></a>
-                      <a href="#"><i class="fa fa-linkedin" title="Linkedin"></i></a>
+                      <?php if($res[$i]['facebook'] != "") { ?>
+                      <a href="<?php echo $res[$i]['facebook'] ?>" target="_blank"><i class="fa fa-facebook" title="Facebook" ></i></a>
+                      <?php } ?>
+                      <?php if($res[$i]['instagram'] != "") { ?>
+                      <a href="<?php echo $res[$i]['instagram'] ?>"><i class="fa fa-instagram" title="Instagram"></i></a>
+                      <?php } ?>
+                      <?php if($res[$i]['twitter'] != "") { ?>
+                      <a href="<?php echo $res[$i]['twitter'] ?>"><i class="fa fa-twitter" title="Twitter"></i></a>
+                      <?php } ?>
+                      <?php if($res[$i]['linkedin'] != "") { ?>
+                      <a href="<?php echo $res[$i]['linkedin'] ?>"><i class="fa fa-linkedin" title="Linkedin"></i></a>
+                      <?php } ?>
                     </div>
                   </div>
-                </li>
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-2.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Kelly Wenzel</h4>
-                      <span>Pizza Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-youtube"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-3.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Greg Hong</h4>
-                      <span>Grill Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-google-plus"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-5.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Marty Fukuda</h4>
-                      <span>Burger Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-google-plus"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>  
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-6.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Simon Jonson</h4>
-                      <span>Head Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-google-plus"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-2.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Kelly Wenzel</h4>
-                      <span>Pizza Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-google-plus"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-3.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Greg Hong</h4>
-                      <span>Grill Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-google-plus"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="mu-single-chef">
-                    <figure class="mu-single-chef-img">
-                      <img src="assets/img/chef/chef-5.jpg" alt="chef img">
-                    </figure>
-                    <div class="mu-single-chef-info">
-                      <h4>Marty Fukuda</h4>
-                      <span>Burger Chef</span>
-                    </div>
-                    <div class="mu-single-chef-social">
-                      <a href="#"><i class="fa fa-facebook"></i></a>
-                      <a href="#"><i class="fa fa-twitter"></i></a>
-                      <a href="#"><i class="fa fa-google-plus"></i></a>
-                      <a href="#"><i class="fa fa-linkedin"></i></a>
-                    </div>
-                  </div>
-                </li>                      
+                </li> 
+                
+                <?php } ?>
+
               </ul>
             </div>
           </div>
@@ -1359,5 +1340,9 @@
   <!-- Ajax para funcionar mascara --> 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 
+
+
   </body>
 </html>
+
+
