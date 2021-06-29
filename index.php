@@ -185,8 +185,6 @@ if($total_cat > 0){
             foreach ($res[$i] as $key => $value) { }
             $id_reg = $res[$i]['id'];
 
-
-        
         ?>
         <!-- Top slider single slide -->
         <div class="mu-top-slider-single">
@@ -1196,41 +1194,45 @@ if($total_cat > 0){
             <div class="mu-latest-news-content">
               <div class="row">
 
-                <!-- <?php
+                <?php
                 
                 $query = $pdo->query("SELECT * FROM blog order by id desc limit 2");
                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
                 for($i=0; $i < @count($res); $i++) {
                   foreach ($res[$i] as $key => $value) { }
                   $id_reg = $res[$i]['id'];
-                  $funcionario = $res[$i]['funcionario'];
+                  $usuario = $res[$i]['author'];
+                  $data = $res[$i]['data'];
+                  $data = implode('/', array_reverse(explode('-', $data)));
 
-                $query2 = $pdo->query("SELECT * FROM funcionarios where id = '$funcionario'");
+                $query2 = $pdo->query("SELECT * FROM usuarios where id = '$usuario'");
                 $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                $nome_func = $res2[0]['nome'];
-                }
+                $nome_usuario = $res2[0]['nome'];
+                
               
-                ?> -->
+                ?>
 
                 <!-- start single blog -->
                 <div class="col-md-6">
                   <article class="mu-news-single">
-                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, distinctio!</a></h3>
+                    <h3><a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>"><?php echo $res[$i]['titulo'] ?></a></h3>
                     <figure class="mu-news-img">
-                      <a href="#"><img src="assets/img/news/1.jpg" alt="img"></a>                      
+                      <a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>"><img src="sistema/img/blog/<?php echo $res[$i]['imagem'] ?>" alt="img"></a>                      
                     </figure>
                     <div class="mu-news-single-content">                      
                       <ul class="mu-meta-nav">
-                        <li>Author:</li>
-                        <li>Data: </li>
+                        <li>Author: <?php echo $nome_usuario ?></li>
+                        <li>Data: <?php echo $data?></li>
                       </ul>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
+                      <p style="text-align: justify; height: 80px; overflow: auto;"><?php echo $res[$i]['descricao_1'] ?></p>
                       <div class="mu-news-single-bottom">
-                        <a href="blog-single.html" class="mu-readmore-btn">Veja Mais (+)</a>
+                        <a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>" class="mu-readmore-btn">Veja Mais (+)</a>
                       </div>
                     </div>                   
                   </article>
                 </div>
+
+                <?php } ?>
 
               </div>
               <!-- Start brows more btn -->
