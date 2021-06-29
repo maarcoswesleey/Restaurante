@@ -9,9 +9,16 @@ if(@$_GET['pagina'] != null){
 
 $limite = $pag * @$itens_por_pagina_blog;
 $pagina = $pag;
-$nome_pag = 'blog.php'
+$nome_pag = 'blog.php';
+
+//BUSCAR O TOTAL DE REGISTRO PARA PAGINAR
+$query3 = $pdo->query("SELECT * FROM blog ");
+$res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+$num_total = @count($res3);
+$num_paginas = ceil($num_total/$itens_por_pagina_blog);
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -122,7 +129,7 @@ $nome_pag = 'blog.php'
 
                     <?php
                   
-                      $query = $pdo->query("SELECT * FROM blog order by id desc");
+                      $query = $pdo->query("SELECT * FROM blog order by id desc LIMIT $limite, $itens_por_pagina_blog");
                       $res = $query->fetchAll(PDO::FETCH_ASSOC);
                       for($i=0; $i < @count($res); $i++) {
                         foreach ($res[$i] as $key => $value) { }
@@ -136,7 +143,6 @@ $nome_pag = 'blog.php'
                       $query2 = $pdo->query("SELECT * FROM usuarios where id = '$usuario'");
                       $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
                       $nome_usuario = $res2[0]['nome'];
-                  
                 
                     ?>
                     <article class="mu-news-single">
@@ -169,18 +175,27 @@ $nome_pag = 'blog.php'
                       <nav>
                         <ul class="mu-blog-pagination">
                           <li>
-                            <a href="#" aria-label="Previous">
+                            <a href="<?php echo $nome_pag ?>?pagina=0" aria-label="Previous">
                               <span class="fa fa-long-arrow-left"></span>
                             </a>
                           </li>
-                          <li><a href="#">1</a></li>
-                          <li><a href="#">2</a></li>
-                          <li class="active"><a href="#">3</a></li>
-                          <li><a href="#">4</a></li>
-                          <li><a href="#">5</a></li>
+                          <?php 
+                          
+                          for($i =0; $i < @$num_paginas; $i++){
+                            $estilo = '';
+                            if($pagina == $i) {
+                              $estilo = 'text-light';
+                            }
+
+                            if($pagina >= ($i - 2) && $pagina <= ($i + 2)) { ?>
+                            <li><a href="<?php echo $nome_pag ?>?pagina=<?php echo $i ?>" class="<?php $estilo ?>"><?php echo $i + 1 ?> </a></li>
+
+                          <?php  }
+                          }
+                          ?>
                           <li>
-                            <a href="#" aria-label="Next">
-                              <span class="fa fa-long-arrow-right"></span>
+                            <a href="<?php echo $nome_pag ?>?pagina=<?php echo $num_paginas - 1 ?>" aria-label="Next">
+                            <span class="fa fa-long-arrow-right"></a>
                             </a>
                           </li>
                         </ul>
