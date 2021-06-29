@@ -50,3 +50,6 @@ $itens_tela_chamada = 12; //exibir os 12 ultimos pedidos nessa tela
 $card_coluna = 4; //usando um valor de 4 vão ser mostrados 3 cards(pedidos) por cada linha, cada linha possui 12 colunas, se por exemplo desejar 4 cards na linha o valor ali inserido deverá ser 3.
 $tempo_atualizacao_tela_chamadas = 5;  // QUANDO OUVER UM NOVO ITEM ELE VAI MOSTRAR ESSE NOVO ITEM POR 3 SEGUNDOS
 
+$itens_por_pagina_blog = 3;
+
+?>

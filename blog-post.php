@@ -12,6 +12,12 @@ $res = $query->fetchAll(PDO::FETCH_ASSOC);
 $id_reg = $res[0]['id'];
 $usuario = $res[0]['author'];
 $data = $res[0]['data'];
+$palavras = $res[0]['palavras'];
+$visitas = $res[0]['visitas'];
+$visitas = $visitas +1;
+
+// Atualização das Visitas
+$pdo->query("UPDATE blog set visitas = '$visitas' where url_titulo = '$titulo'");
 
 $data = implode('/', array_reverse(explode('-', $data)));
 
@@ -31,7 +37,8 @@ $total_coment = @count($res2);
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">    
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  <meta name="description" content="<?php echo $palavras ?>">  
   <title>Blog - <?php echo $nome_site ?></title>
 
   <!-- Favicon -->
@@ -136,6 +143,7 @@ $total_coment = @count($res2);
                         <ul class="mu-meta-nav">
                           <li>Author: <?php echo $nome_usuario ?></li>
                           <li>Publicado em: <?php echo $data ?></li>
+                          <li>Qtd Visitas: (<?php echo $visitas ?>)</li>
                         </ul>
                         <p style="text-align: justify;"><?php echo $res[0]['descricao_1']; ?></p>
                         <blockquote>

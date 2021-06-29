@@ -24,7 +24,10 @@ if($total_cat > 0){
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <meta name="description" content="bar em trindade, restaurante em trindade, restaurante romeiro, pai eterno, romaria de trinade, divino pai eterno.">
+    <meta name="author" content="Marcos Wesley - DDR Soluções em Tecnologia da Informação">  
+    
     <title><?php echo $nome_site ?></title>
 
     <!-- Favicon -->

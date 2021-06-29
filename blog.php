@@ -1,4 +1,17 @@
-<?php require_once("config.php") ?>
+<?php 
+require_once("conexao.php"); 
+
+if(@$_GET['pagina'] != null){
+  $pag = $_GET['pagina'];
+}else {
+  $pag = 0;
+}
+
+$limite = $pag * @$itens_por_pagina_blog;
+$pagina = $pag;
+$nome_pag = 'blog.php'
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -106,59 +119,49 @@
               <div class="col-md-8 col-sm-8">
                 <div class="mu-blog-content">
                   <!-- Start Single blog item -->
-                  <article class="mu-news-single">
-                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, distinctio!</a></h3>
-                    <figure class="mu-news-img">
-                      <a href="#"><img src="assets/img/news/1.jpg" alt="img"></a>                      
-                    </figure>
-                    <div class="mu-news-single-content">                      
-                      <ul class="mu-meta-nav">
-                        <li>By Admin</li>
-                        <li>Date: May 10 2016</li>
-                      </ul>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="mu-news-single-bottom">
-                        <a href="#" class="mu-readmore-btn">Read More</a>
-                      </div>
-                    </div>                   
-                  </article>
+
+                    <?php
+                  
+                      $query = $pdo->query("SELECT * FROM blog order by id desc");
+                      $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                      for($i=0; $i < @count($res); $i++) {
+                        foreach ($res[$i] as $key => $value) { }
+                        $id_reg = $res[$i]['id'];
+                        $usuario = $res[$i]['author'];
+                        $data = $res[$i]['data'];
+                        $visitas = $res[$i]['visitas'];
+
+                        $data = implode('/', array_reverse(explode('-', $data)));
+
+                      $query2 = $pdo->query("SELECT * FROM usuarios where id = '$usuario'");
+                      $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                      $nome_usuario = $res2[0]['nome'];
+                  
+                
+                    ?>
+                    <article class="mu-news-single">
+                      <h3><a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>"><?php echo $res[$i]['titulo'] ?></a></h3>
+                      <figure class="mu-news-img">
+                        <a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>"><img src="sistema/img/blog/<?php echo $res[$i]['imagem'] ?>" alt="img"></a>                      
+                      </figure>
+                      <div class="mu-news-single-content">                      
+                        <ul class="mu-meta-nav">
+                          <li>Author: <?php echo $nome_usuario ?></li>
+                          <li>Data: <?php echo $data?></li>
+                          <li>Qtd Visitas: (<?php echo $visitas ?>)</li>
+                        </ul>
+                        <p style="text-align: justify; height: 80px; overflow: auto;"><?php echo $res[$i]['descricao_1'] ?></p>
+                        <div class="mu-news-single-bottom">
+                          <a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>" class="mu-readmore-btn">Veja Mais (+)</a>
+                        </div>
+                      </div>                   
+                    </article>
+
+                    <?php } ?>
+
+
                   <!-- End Single blog item -->
-                  <!-- Start Single blog item -->
-                  <article class="mu-news-single">
-                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, distinctio!</a></h3>
-                    <figure class="mu-news-img">
-                      <a href="#"><img src="assets/img/news/2.jpg" alt="img"></a>                      
-                    </figure>
-                    <div class="mu-news-single-content">                      
-                      <ul class="mu-meta-nav">
-                        <li>By Admin</li>
-                        <li>Date: May 10 2016</li>
-                      </ul>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="mu-news-single-bottom">
-                        <a href="#" class="mu-readmore-btn">Read More</a>
-                      </div>
-                    </div>                   
-                  </article>
-                  <!-- End Single blog item -->
-                  <!-- Start Single blog item -->
-                  <article class="mu-news-single">
-                    <h3><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque, distinctio!</a></h3>
-                    <figure class="mu-news-img">
-                      <a href="#"><img src="assets/img/news/3.jpg" alt="img"></a>                      
-                    </figure>
-                    <div class="mu-news-single-content">                      
-                      <ul class="mu-meta-nav">
-                        <li>By Admin</li>
-                        <li>Date: May 10 2016</li>
-                      </ul>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio est quaerat magnam exercitationem voluptas, voluptatem sed quam ab laborum voluptatum tempore dolores itaque, molestias vitae.</p>
-                      <div class="mu-news-single-bottom">
-                        <a href="#" class="mu-readmore-btn">Read More</a>
-                      </div>
-                    </div>                   
-                  </article>
-                  <!-- End Single blog item -->
+
                 </div>
                 <div class="row">
                   <div class="col-md-12">
@@ -191,29 +194,37 @@
                 <aside class="mu-blog-sidebar">
                   <!-- Blog Sidebar Single -->
                   <div class="mu-blog-sidebar-single">
-                    <h3>Categories</h3>
-                    <ul class="mu-catg-nav">
-                      <li><a href="#">Cake</a></li>
-                      <li><a href="#">Pizza</a></li>
-                      <li><a href="#">Drinks</a></li>
-                      <li><a href="#">Dessert</a></li>
-                      <li><a href="#">Chicken</a></li>
-                      <li><a href="#">Beef</a></li>
-                      <li><a href="#">Mutton</a></li>
-                    </ul>
-                  </div>
+                      <h3>Categorias</h3>
+                      <ul class="mu-catg-nav">
+                      <?php 
+
+                      $query = $pdo->query("SELECT * FROM categorias order by nome asc");
+                      $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                      for($i=0; $i < @count($res); $i++) {
+                        foreach ($res[$i] as $key => $value) { }
+                      ?>
+                        <li><a href="index.php?#mu-restaurant-menu"><?php echo $res[$i]['nome']?></a></li>
+
+                      <?php } ?>
+
+                      </ul>
+                    </div>
                   <!-- End Blog Sidebar Single -->
                   <!-- Blog Sidebar Single -->
                   <div class="mu-blog-sidebar-single">
-                    <h3>Postagens Recentes</h3>
-                    <ul class="mu-recent-news-nav">
-                      <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, ipsum!</a></li>
-                      <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, ipsum!</a></li>
-                      <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, ipsum!</a></li>
-                      <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, ipsum!</a></li>
-                      <li><a href="#">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione, ipsum!</a></li>
-                    </ul>
-                  </div>
+                      <h3>Postagens Recentes</h3>
+                      <ul class="mu-recent-news-nav">
+                      <?php 
+
+                      $query = $pdo->query("SELECT * FROM blog order by id desc");
+                      $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                      for($i=0; $i < @count($res); $i++) {
+                        foreach ($res[$i] as $key => $value) { }
+                      ?>
+                        <li><a href="blog-post.php?titulo=<?php echo $res[$i]['url_titulo'] ?>"> <?php echo $res[$i]['titulo']; ?> </a></li>
+                      <?php } ?>
+                      </ul>
+                    </div>
                   <!-- End Blog Sidebar Single -->
                 </aside>
               </div>
