@@ -915,11 +915,18 @@ if($total_cat > 0){
                 <!-- Start gallery menu -->
                 <ul>
                   <li class="filter active" data-filter="all">TODAS</li>
-                  <li class="filter" data-filter=".food">PRATOS</li>
-                  <li class="filter" data-filter=".drink">DRINKS</li>
-                  <li class="filter" data-filter=".restaurant">AMBIENTE</li>
-                  <li class="filter" data-filter=".dinner">VINHOS</li>
-                  <li class="filter" data-filter=".dessert">PETISCOS</li>
+                    <?php
+                
+                      $query = $pdo->query("SELECT * FROM categoria_img order by id asc");
+                      $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                      for($i=0; $i < @count($res); $i++) {
+                        foreach ($res[$i] as $key => $value) { }
+                        $id_reg = $res[$i]['id'];
+
+                    ?>
+                      <li class="filter" data-filter=".<?php echo $res[$i]['nome'] ?>"><?php echo $res[$i]['nome'] ?></li>
+                
+                    <?php } ?>
                 </ul>
               </div>
               <!-- Start gallery image -->

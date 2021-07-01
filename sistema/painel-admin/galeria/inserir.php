@@ -30,13 +30,18 @@ move_uploaded_file($imagem_temp, $caminho);
 
 if($id == ""){
 	$query = $pdo->prepare("INSERT INTO galeria SET categoria = :categoria, imagem = :imagem");
+	$query->bindValue(":imagem", "$imagem");
 
 }else{
+		if($imagem == "sem-foto.jpg"){
+		$query = $pdo->prepare("UPDATE galeria SET categoria = :categoria WHERE id = '$id'");
+	}else {
 		$query = $pdo->prepare("UPDATE galeria SET categoria = :categoria, imagem = :imagem WHERE id = '$id'");
+		$query->bindValue(":imagem", "$imagem");
 	}
 	
+}
 
-$query->bindValue(":imagem", "$imagem");
 $query->bindValue(":categoria", "$categoria");
 
 $query->execute();
