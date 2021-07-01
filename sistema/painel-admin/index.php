@@ -18,6 +18,8 @@ $menu11 = 'banners';
 $menu12 = 'blog';
 $menu13 = 'estoque';
 $menu14 = 'reservas';
+$menu15 = 'galeria';
+$menu16 = 'categorias-galeria';
 
 
 if(@$_GET['pag'] == 'reservas' || @$_GET['pag'] == 'pedidos'){
@@ -98,7 +100,15 @@ if($total_reg > 0){
 
 							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu5 ?>">Mesas</a></li>
 
+							<li><hr class="dropdown-divider"></li>
+
 							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu11 ?>">Banners</a></li>
+
+							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu15 ?>">Galeria</a></li>
+
+							<li><hr class="dropdown-divider"></li>
+
+							<li><a class="dropdown-item" href="index.php?pag=<?php echo $menu16 ?>">Categoria Galeria</a></li>
 
 
 						</ul>
@@ -248,7 +258,15 @@ if($total_reg > 0){
 			$pag_painel = '../painel-recep/';
 			require_once('../painel-recep/'.$menu14.'.php');
 
+		}else if(@$_GET['pag'] == $menu15){
+			require_once($menu15.'.php');
+
+		}else if(@$_GET['pag'] == $menu16){
+			require_once($menu16.'.php');
+
 		}
+
+
 
 
 
