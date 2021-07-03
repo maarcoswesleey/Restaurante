@@ -1,22 +1,18 @@
-<?php  
-	require_once("config.php");
+<?php 
+require_once("config.php");
 
-$nome_contato = $_POST['nome_contato'];
-$email_contato = $_POST['email_contato'];
-$mensagem_contato = $_POST['mensagem_contato'];
+$nome = $_POST['nome_contato'];
+$email = $_POST['email_contato'];
+$mensagem = $_POST['mensagem_contato'];
 
 $destinatario = $email_adm;
 $assunto = 'Email de Contato - '.$nome_site;
-$mensagem = ('Nome: '.$nome_contato. "\r\n"."\r\n" 
-	. 'Email: '.$email_contato. "\r\n"."\r\n"
-	. 'Mensagem: '.$mensagem_contato);
+$mensagem = 'Nome: '.$nome. "\r\n"."\r\n" .'Email: '.$email. "\r\n"."\r\n" .'Mensagem: '.$mensagem;
+$cabecalhos = "From: ".$email;
+mail($destinatario, $assunto, $mensagem, $cabecalhos);
 
-$cabecalho ="From: ".$email;
+ ?>
 
-@mail($destinatario, $assunto, $mensagem, $cabecalho); // Retirar @ após hospedar
-
-?>
-
-<script>alert('Enviado com sucesso!');</script>
+<script>alert('Enviado com Sucesso.'); </script>
 
 <meta http-equiv="refresh" content="0; url=index.php#mu-contact">
