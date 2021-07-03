@@ -52,4 +52,7 @@ $tempo_atualizacao_tela_chamadas = 5;  // QUANDO OUVER UM NOVO ITEM ELE VAI MOST
 
 $itens_por_pagina_blog = 3;
 
+$maximo_imagens_galeria_index = 27; //Imagens da Galeria na página index, o máximo de imagens exibidas por categoeria é 27 imagens
+
+$produtos_por_linha_index = 3; //total de colunas que serão mostrados os cards de produtos na index, se a descrição dos proutos forem muito grandes use apenas duas.
 ?>

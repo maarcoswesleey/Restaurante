@@ -624,6 +624,7 @@ img {
 #mu-restaurant-menu .mu-restaurant-menu-area .mu-restaurant-menu-content .mu-tab-content-area .mu-menu-item-nav li .media .media-body .media-heading {
   font-size: 20px;
   margin-bottom: 10px;
+  text-transform: capitalize;
 }
 #mu-restaurant-menu .mu-restaurant-menu-area .mu-restaurant-menu-content .mu-tab-content-area .mu-menu-item-nav li .media .media-body .media-heading a {
   -webkit-transition: all 0.5s;
@@ -812,6 +813,7 @@ RESERVATION SECTION
   -ms-transition: all 0.5s;
   -o-transition: all 0.5s;
   transition: all 0.5s;
+  text-transform: uppercase;
 }
 #mu-gallery .mu-gallery-area .mu-gallery-content .mu-gallery-top ul li::after {
   border: 2px solid #fff;
@@ -2148,6 +2150,7 @@ RESERVATION SECTION
   #mu-restaurant-menu .mu-restaurant-menu-area .mu-restaurant-menu-content .mu-restaurant-menu li a {
     font-size: 16px;
     margin: 0 5px;
+    
   }
 
   #mu-reservation .mu-reservation-area .mu-reservation-content p {
