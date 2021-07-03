@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Jun-2021 às 11:58
+-- Tempo de geração: 03-Jul-2021 às 04:54
 -- Versão do servidor: 10.4.19-MariaDB
 -- versão do PHP: 8.0.6
 
@@ -123,9 +123,30 @@ INSERT INTO `categorias` (`id`, `nome`) VALUES
 (5, 'Pizzas'),
 (9, 'Carnes'),
 (10, 'Peixes'),
-(11, 'Massas'),
 (12, 'Prato Feito'),
-(13, 'Sobremesas');
+(13, 'Sobremesas'),
+(14, 'Massas');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `categoria_img`
+--
+
+CREATE TABLE `categoria_img` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `categoria_img`
+--
+
+INSERT INTO `categoria_img` (`id`, `nome`) VALUES
+(1, 'Pratos'),
+(3, 'Restaurante'),
+(4, 'Drinks'),
+(5, 'Ambiente');
 
 -- --------------------------------------------------------
 
@@ -352,6 +373,30 @@ INSERT INTO `funcionarios` (`id`, `nome`, `cpf`, `email`, `telefone`, `endereco`
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `galeria`
+--
+
+CREATE TABLE `galeria` (
+  `id` int(11) NOT NULL,
+  `imagem` varchar(100) NOT NULL,
+  `categoria` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `galeria`
+--
+
+INSERT INTO `galeria` (`id`, `imagem`, `categoria`) VALUES
+(3, '01-07-2021-06-29-36-1.jpg', 1),
+(4, '01-07-2021-06-29-43-2.jpg', 4),
+(5, '01-07-2021-06-29-50-6.jpg', 1),
+(6, '01-07-2021-06-29-58-5.jpg', 1),
+(7, '01-07-2021-06-30-12-8.jpg', 5),
+(8, '01-07-2021-06-30-18-3.jpg', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `itens_pedidos`
 --
 
@@ -424,7 +469,11 @@ INSERT INTO `itens_pedidos` (`id`, `pedido`, `item`, `tipo`, `valor`, `quantidad
 (50, 31, 9, 'Prato', '25.00', 1, '25.00', '2', 'Preparando'),
 (51, 31, 8, 'Prato', '18.00', 1, '18.00', '2', 'Preparando'),
 (52, 31, 9, 'Prato', '25.00', 1, '25.00', '2', 'Preparando'),
-(53, 32, 1, 'Prato', '15.00', 1, '15.00', '2', 'Preparando');
+(53, 32, 1, 'Prato', '15.00', 1, '15.00', '2', 'Preparando'),
+(54, 33, 10, 'Prato', '15.00', 1, '15.00', '3', 'Preparando'),
+(55, 33, 8, 'Prato', '18.00', 1, '18.00', '3', 'Preparando'),
+(56, 34, 10, 'Prato', '15.00', 1, '15.00', '2', 'Preparando'),
+(57, 34, 10, 'Produto', '22.50', 1, '22.50', '2', 'Pronto');
 
 -- --------------------------------------------------------
 
@@ -526,7 +575,9 @@ INSERT INTO `pedidos` (`id`, `valor`, `mesa`, `funcionario`, `garcon`, `data`, `
 (29, '36.50', 2, 8, 13, '2021-06-26', '', '3.65', '10.00', '50.15', 'Não'),
 (30, '29.99', 2, 22, 30, '2021-06-26', '', '3.00', '10.00', '42.99', 'Não'),
 (31, '83.00', 2, 19, 30, '2021-06-26', '', '8.30', '10.00', '101.30', 'Não'),
-(32, '0.00', 2, 22, 30, '2021-06-26', '', '0.10', '10.00', '0.00', 'Não');
+(32, '0.00', 2, 22, 30, '2021-06-26', '', '0.10', '10.00', '0.00', 'Não'),
+(33, '33.00', 3, 21, 13, '2021-07-01', '', '3.30', '10.00', '46.30', 'Não'),
+(34, '0.00', 2, 19, 13, '2021-07-01', '', '0.10', '10.00', '0.00', 'Não');
 
 -- --------------------------------------------------------
 
@@ -551,8 +602,6 @@ CREATE TABLE `pratos` (
 INSERT INTO `pratos` (`id`, `nome`, `descricao`, `valor`, `categoria`, `imagem`, `ativo`) VALUES
 (1, 'Feijoada do Chef', 'Porção de Feijoada preparada pelo chef....', '15.00', 3, '22-03-2021-15-51-12-feijoada.jpg', 'Sim'),
 (3, 'Porção de Fritas', 'Porção de Fritas 400 g', '29.99', 3, '22-03-2021-15-51-42-fritas.jpg', 'Sim'),
-(4, 'Lasanha de Carne', 'Lasanha para duas pessoas', '12.99', 11, '22-03-2021-15-52-34-lasanha.jpg', 'Sim'),
-(5, 'Macarrão com Camarão', 'Macarrão ao molho de camarão', '34.99', 11, '22-03-2021-16-00-41-macarrao-com-camarao.jpg', 'Sim'),
 (6, 'Sopa 350 Gramas', 'Esperimente nossa sopa, vários legumes...', '9.99', 3, '22-03-2021-16-02-08-sopa.jpg', 'Sim'),
 (7, 'Prato Tradicional', 'PF Tradicional com direito a uma carne', '9.99', 12, '22-03-2021-16-03-07-tradicional.jpg', 'Sim'),
 (8, 'Feijão Tropeiro', 'Porção para duas pessoas', '18.00', 3, '22-03-2021-16-03-32-tropeiro.jpg', 'Sim'),
@@ -584,7 +633,7 @@ CREATE TABLE `produtos` (
 INSERT INTO `produtos` (`id`, `nome`, `descricao`, `valor_compra`, `valor_venda`, `categoria`, `fornecedor`, `estoque`, `imagem`) VALUES
 (7, 'Coca Cola Lata', 'Coca Cola 350 ML', '2.30', '3.50', 1, 2, 58, '22-03-2021-17-58-05-refri.jpg'),
 (8, 'Cerveja Lata', '350 ML', '3.50', '4.50', 1, 2, 30, '22-03-2021-17-57-59-brahma.jpg'),
-(10, 'Açaí 1 Litro', 'Pote de Açãí de 1 Litro', '2.00', '22.50', 1, 2, 44, '22-03-2021-18-02-07-acai-2.jpeg'),
+(10, 'Açaí 1 Litro', 'Pote de Açãí de 1 Litro', '2.00', '22.50', 1, 2, 43, '22-03-2021-18-02-07-acai-2.jpeg'),
 (11, 'Dom Bosco', '', '0.00', '50.00', 2, 0, 0, '27-06-2021-00-16-23-vinho_tinto_suave_dom_bosco_garrafa_750ml_5792485_1_20200921173346.jpg');
 
 -- --------------------------------------------------------
@@ -734,6 +783,12 @@ ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Índices para tabela `categoria_img`
+--
+ALTER TABLE `categoria_img`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Índices para tabela `chef`
 --
 ALTER TABLE `chef`
@@ -779,6 +834,12 @@ ALTER TABLE `fornecedores`
 -- Índices para tabela `funcionarios`
 --
 ALTER TABLE `funcionarios`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Índices para tabela `galeria`
+--
+ALTER TABLE `galeria`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -843,7 +904,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `banners`
 --
 ALTER TABLE `banners`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `blog`
@@ -861,7 +922,13 @@ ALTER TABLE `cargos`
 -- AUTO_INCREMENT de tabela `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de tabela `categoria_img`
+--
+ALTER TABLE `categoria_img`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `chef`
@@ -912,10 +979,16 @@ ALTER TABLE `funcionarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
+-- AUTO_INCREMENT de tabela `galeria`
+--
+ALTER TABLE `galeria`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT de tabela `itens_pedidos`
 --
 ALTER TABLE `itens_pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT de tabela `mesas`
@@ -933,7 +1006,7 @@ ALTER TABLE `movimentacoes`
 -- AUTO_INCREMENT de tabela `pedidos`
 --
 ALTER TABLE `pedidos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de tabela `pratos`
