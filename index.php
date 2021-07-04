@@ -154,7 +154,7 @@ if($total_cat > 0){
             <span class="icon-bar"></span>
           </button>
           <!-- LOGO -->                                                        
-          <a class="navbar-brand" href="index.html"><img src="assets/img/logo.png" alt="Logo img"></a> 
+          <a class="navbar-brand" href="index.php"><img src="assets/img/logo2.png" alt="Logo img"></a> 
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="top-menu" class="nav navbar-nav navbar-right mu-main-nav">
@@ -232,13 +232,14 @@ if($total_cat > 0){
                 </div>
               </div>
               <div class="col-md-6">
-                <div class="mu-about-us-right">                
+                <div class="mu-about-us-right" >                
                  <ul class="mu-abtus-slider">                 
-                   <li><img src="assets/img/about-us/sobre.png" alt="img"></li>
-                   <li><img src="assets/img/about-us/sobre.png" alt="img"></li>
-                   <li><img src="assets/img/about-us/sobre.png" alt="img"></li>
-                   <li><img src="assets/img/about-us/sobre.png" alt="img"></li>
-                   <li><img src="assets/img/about-us/sobre.png" alt="img"></li>
+                   <li><img style="border-radius: 10px; " src="assets/img/about-us/sobre.png" alt="img"></li>
+                   <li><img style="border-radius: 10px;" src="assets/img/about-us/01.png" alt="img"></li>
+                   <li><img style="border-radius: 10px;" src="assets/img/about-us/02.png" alt="img"></li>
+                   <li><img style="border-radius: 10px;" src="assets/img/about-us/03.png" alt="img"></li>
+                   <li><img style="border-radius: 10px;" src="assets/img/about-us/04.png" alt="img"></li>
+                   <li><img style="border-radius: 10px;" src="assets/img/about-us/05.png" alt="img"></li>
                  </ul>
                 </div>
               </div>
